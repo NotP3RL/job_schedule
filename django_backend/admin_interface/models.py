@@ -10,7 +10,6 @@ class Employee(models.Model):
         return self.name
 
 
-
 class Shift(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(auto_now=True)
@@ -39,13 +38,11 @@ class Break(models.Model):
 
 
 class Weekend(models.Model):
-    start_date = models.DateField()
-    end_date = models.DateField()
+    date = models.DateField()
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.start_date}, {self.end_date}'
-
+        return f'{self.date}'
 
 
 class Ticket(models.Model):

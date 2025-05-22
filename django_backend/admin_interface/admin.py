@@ -39,21 +39,14 @@ class ShiftInline(admin.TabularInline):
         return mark_safe(f'<img src="{obj.image.url}" style="max-height: 200px;">')
 
 
-
-
-
 class WeekendInline(admin.TabularInline):
     model = Weekend
-    readonly_fields = ['display_start_date', 'display_end_date']
-    exclude = ['start_date', 'end_date']
+    readonly_fields = ['display_date']
+    exclude = ['date']
 
-    @admin.display(description='начальная дата')
-    def display_start_date(self, obj):
-        return obj.start_date
-
-    @admin.display(description='конечная дата')
-    def display_end_date(self, obj):
-        return obj.end_date
+    @admin.display(description='дата')
+    def display_date(self, obj):
+        return obj.date
 
 
 class BreakInline(admin.TabularInline):
@@ -146,15 +139,11 @@ class BreakAdmin(admin.ModelAdmin):
 
 @admin.register(Weekend)
 class WeekendAdmin(admin.ModelAdmin):
-    list_display = ['display_start_date', 'display_end_date', 'employee_telegram_id']
+    list_display = ['display_date', 'employee_telegram_id']
 
-    @admin.display(description='начальная дата')
-    def display_start_date(self, obj):
-        return obj.start_date
-
-    @admin.display(description='конечная дата')
-    def display_end_date(self, obj):
-        return obj.end_date
+    @admin.display(description='дата')
+    def display_date(self, obj):
+        return obj.date
 
     @admin.display(description='telegram id сотрудника')
     def employee_telegram_id(self, obj):
